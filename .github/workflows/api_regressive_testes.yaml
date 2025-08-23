@@ -3,9 +3,9 @@ name: Automated Regression API Testing with Hoppscotch
 on:
   workflow_dispatch:
 
-  permissions:
-    checks: write
-    contents: read
+permissions:
+  checks: write
+  contents: read
 
 jobs:
   run-tests:
@@ -37,7 +37,7 @@ jobs:
             --results=results/report.xml \
             --save=results/relatorio.html \
             --relativePath=true
-     
+
       - name: Publicar resultado dos testes no GitHub
         uses: dorny/test-reporter@v1
         if: always()
