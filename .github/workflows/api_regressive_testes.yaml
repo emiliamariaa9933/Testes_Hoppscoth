@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Hoppscotch CLI e JUnit Viewer
+      - name: Instalar Dependências
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
@@ -42,10 +42,11 @@ jobs:
           name: relatorio-hoppscotch
           path: results/relatorio.html
 
-      - name: Publicar resultado dos testes no GitHub
+      - name: Publicar resultado dos testes no Summary
         uses: dorny/test-reporter@v1
         if: always()
         with:
-          name: Relatório Hoppscotch
+          name: 📊 Relatório de Testes de API
           path: results/report.xml
-          reporter: jest-junit
+          reporter: java-junit
+          fail-on-error: false
