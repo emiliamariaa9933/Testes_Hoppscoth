@@ -1,15 +1,13 @@
-name: Automated Regression API Testing with Hoppscotch
+name: Automated Regressive API Testing
 
 on:
   workflow_dispatch:
 
-permissions:
-  checks: write
-  contents: read
-
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Checkout repositório
         uses: actions/checkout@v4
@@ -23,7 +21,7 @@ jobs:
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
-      - name: Executar testes da API com Hoppscotch
+      - name: Executar Testes API
         run: |
           mkdir -p results
           hopp test \
@@ -38,25 +36,16 @@ jobs:
             --save=results/relatorio.html \
             --relativePath=true
 
-      - name: Publicar resultado dos testes no GitHub
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Relatório Hoppscotch
-          path: results/report.xml
-          reporter: java-junit
-
       - name: Publicar artefato do relatório HTML
         uses: actions/upload-artifact@v4
         with:
           name: relatorio-hoppscotch
           path: results/relatorio.html
 
-      - name: Instalar dependências para Jest
-        run: npm install
-
-      - name: Executar testes Jest com cobertura
-        run: npm test -- --coverage
-
-      - name: Publicar relatório de cobertura Jest no PR
-        uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Publicar resultado dos testes no GitHub
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Relatório Hoppscotch
+          path: results/report.xml
+          reporter: jest-junit
