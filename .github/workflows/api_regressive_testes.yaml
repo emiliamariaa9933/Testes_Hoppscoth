@@ -7,7 +7,9 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     permissions:
-      issues: write
+      contents: read      # Necessário para ler o repositório
+      checks: write       # ✅ Necessário para o dorny/test-reporter funcionar corretamente
+
     steps:
       - name: Checkout repositório
         uses: actions/checkout@v4
