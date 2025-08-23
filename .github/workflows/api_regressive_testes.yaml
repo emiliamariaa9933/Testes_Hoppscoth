@@ -60,5 +60,3 @@ jobs:
 
       - name: Publicar relatório de cobertura Jest no PR
         uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          custom-title: '🧪 Cobertura de Testes Jest'
