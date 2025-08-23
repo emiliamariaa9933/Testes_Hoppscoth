@@ -15,20 +15,35 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Hoppscotch CLI e Junit viewer
+      - name: Instalar Hoppscotch CLI e JUnit Viewer
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
-      - name: Execução testes API com Hoppscotch
+      - name: Executar testes da API com Hoppscotch
         run: |
-          hopp test -e scripts-hoppscotch/environments/Global.json -d 1000 scripts-hoppscotch/collections/testes_api.json --reporter-junit results/report.xml
+          mkdir -p results
+          hopp test \
+            -e scripts-hoppscotch/environments/Global.json \
+            -d 1000 scripts-hoppscotch/collections/testes_api.json \
+            --report-junit results/report.xml
 
       - name: Gerar relatório HTML
         run: |
-          junit-viewer --results=resultado.xml --save=relatorio.html --relativePath=true
+          junit-viewer \
+            --results=results/report.xml \
+            --save=results/relatorio.html \
+            --relativePath=true
 
-      - name: Publicar artefato relatório
+      - name: Publicar resultado dos testes no GitHub UI
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Relatório Hoppscotch
+          path: results/report.xml
+          reporter: jest-junit
+
+      - name: Publicar artefato do relatório HTML
         uses: actions/upload-artifact@v4
         with:
           name: relatorio-hoppscotch
-          path: relatorio.html
+          path: results/relatorio.html
