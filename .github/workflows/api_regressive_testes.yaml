@@ -22,6 +22,7 @@ jobs:
       - name: Instalar Dependências
         run: |
           npm install -g @hoppscotch/cli junit-viewer
+          npm ci
 
       - name: Executar Testes API
         run: |
