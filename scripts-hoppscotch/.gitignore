@@ -1,0 +1,8 @@
+# Ignorar arquivos de relatório
+*.xml
+*.html
+
+# Opcional: ignorar pastas onde você armazena relatórios
+/reports/
+/relatorios/
+/results/

@@ -1,0 +1,329 @@
+[
+  {
+    "v": 9,
+    "name": "Trello",
+    "folders": [
+      {
+        "v": 9,
+        "name": "Cards",
+        "folders": [
+          {
+            "v": 9,
+            "name": "Criar Card",
+            "folders": [],
+            "requests": [
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": "{\r\n    \"name\": \"Card Teste\",\r\n    \"desc\": \"Card criado com sucesso\",\r\n    \"pos\": \"top\",\r\n    \"due\": \"04/04/2023\"\r\n}",
+                  "contentType": "application/json"
+                },
+                "name": "Criar Card com Sucesso",
+                "method": "POST",
+                "params": [
+                  {
+                    "key": "idList",
+                    "value": "<<idList>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Set environment for idCard\", () => {\r\n    const response = pw.response.body;\r\n\r\n    // Armazena o ID do primeiro item como variável de ambiente\r\n    pw.env.set(\"idCard\", response.id);\r\n});\r\n\r\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              },
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": "{\r\n    \"name\": \"teste\",\r\n    \"desc\": \"validando campo data inválido\",\r\n    \"pos\": \"top\",\r\n    \"due\": \"quarta\"\r\n}",
+                  "contentType": "application/json"
+                },
+                "name": "Data inválida",
+                "method": "POST",
+                "params": [
+                  {
+                    "key": "idList",
+                    "value": "<<idList>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n  pw.expect(pw.response.status).toBe(400);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n  const user = pw.response.body;\r\n  pw.expect(user.message).toBe(\"invalid date\");\r\n  pw.expect(user.error).toBe(\"ERROR\");\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n  const user = pw.response.body;\r\n  pw.expect(user.message).toBeType(\"string\");\r\n  pw.expect(user.error).toBeType(\"string\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              },
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": "{\r\n    \"name\": 7,\r\n    \"desc\": \"validando campo nome inválido\",\r\n    \"pos\": \"top\",\r\n    \"due\": \"04/04/2023\"\r\n}",
+                  "contentType": "application/json"
+                },
+                "name": "Formato campo inválido",
+                "method": "POST",
+                "params": [
+                  {
+                    "key": "idList",
+                    "value": "<<idList>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(400);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const response = pw.response.body;\r\n    pw.expect(response).toBe(\"invalid value for name\");\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const response = pw.response.body;\r\n    pw.expect(response).toBeType(\"string\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              }
+            ],
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "headers": [],
+            "_ref_id": "coll_meoovxjw_f833dbf4-8c93-4c71-9e81-b98ce9f51fd5"
+          },
+          {
+            "v": 9,
+            "name": "Consultar Card",
+            "folders": [],
+            "requests": [
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": null,
+                  "contentType": null
+                },
+                "name": "Consultar Card",
+                "method": "GET",
+                "params": [
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              }
+            ],
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "headers": [],
+            "_ref_id": "coll_meoovxjw_233ff075-40fc-4ddf-affc-63d46879e008"
+          },
+          {
+            "v": 9,
+            "name": "Editar Card",
+            "folders": [],
+            "requests": [
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": "{\r\n    \"id\": \"624b7647982e94831b01292a\",\r\n    \"name\": \"teste update\",\r\n    \"pos\": \"top\",\r\n    \"desc\": \"teste api httparty\",\r\n    \"due\": \"04/04/2024\",\r\n    \"cover\": {\r\n        \"color\": \"pink\",\r\n        \"brightness\": \"light\"\r\n    }\r\n}",
+                  "contentType": "application/json"
+                },
+                "name": "Editar Card",
+                "method": "PUT",
+                "params": [
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              },
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": "{\r\n    \"id\": \"624b7647982e94831b01292a\",\r\n    \"name\": \"teste update\",\r\n    \"pos\": \"top\",\r\n    \"desc\": \"teste api httparty\",\r\n    \"due\": \"04/04/2024\",\r\n    \"cover\": {\r\n        \"color\": \"pink\",\r\n        \"brightness\": \"dark\"\r\n    }\r\n}",
+                  "contentType": "application/json"
+                },
+                "name": "Campos obrigatórios",
+                "method": "PUT",
+                "params": [
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              }
+            ],
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "headers": [],
+            "_ref_id": "coll_meoovxjw_16c6e5ec-5ea4-4d70-a719-3f2679aec1a4"
+          },
+          {
+            "v": 9,
+            "name": "Deletar Card",
+            "folders": [],
+            "requests": [
+              {
+                "v": "15",
+                "auth": {
+                  "authType": "inherit",
+                  "authActive": true
+                },
+                "body": {
+                  "body": null,
+                  "contentType": null
+                },
+                "name": "Excluir Card",
+                "method": "DELETE",
+                "params": [
+                  {
+                    "key": "key",
+                    "value": "<<key>>",
+                    "active": true,
+                    "description": ""
+                  },
+                  {
+                    "key": "token",
+                    "value": "<<token>>",
+                    "active": true,
+                    "description": ""
+                  }
+                ],
+                "headers": [],
+                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "responses": {},
+                "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card).toBeType(\"object\");\r\n});",
+                "preRequestScript": "",
+                "requestVariables": []
+              }
+            ],
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "headers": [],
+            "_ref_id": "coll_meoovxjw_b4cfde5a-0d2e-437f-8df0-fffa5f99944d"
+          }
+        ],
+        "requests": [],
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "headers": [],
+        "_ref_id": "coll_meoovxjw_ce6270ca-fcc7-455a-90a2-18b3dfce5da9"
+      }
+    ],
+    "requests": [],
+    "auth": {
+      "authType": "inherit",
+      "authActive": true
+    },
+    "headers": [],
+    "_ref_id": "coll_meoovxjw_6938ca1e-fc23-4f08-a505-7c5b81b3c578"
+  }
+]
