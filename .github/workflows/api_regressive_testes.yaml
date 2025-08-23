@@ -25,7 +25,7 @@ jobs:
           hopp test \
             -e scripts-hoppscotch/environments/Global.json \
             -d 1000 scripts-hoppscotch/collections/testes_api.json \
-            --report-junit results/report.xml
+            --reporter-junit results/report.xml
 
       - name: Gerar relatório HTML
         run: |
