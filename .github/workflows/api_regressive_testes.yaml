@@ -3,6 +3,10 @@ name: Automated Regression API Testing with Hoppscotch
 on:
   workflow_dispatch:
 
+  permissions:
+    checks: write
+    contents: read
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -33,14 +37,14 @@ jobs:
             --results=results/report.xml \
             --save=results/relatorio.html \
             --relativePath=true
-
-      - name: Publicar resultado dos testes no GitHub UI
+     
+      - name: Publicar resultado dos testes no GitHub
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Relatório Hoppscotch
           path: results/report.xml
-          reporter: jest-junit
+          reporter: java-junit
 
       - name: Publicar artefato do relatório HTML
         uses: actions/upload-artifact@v4
