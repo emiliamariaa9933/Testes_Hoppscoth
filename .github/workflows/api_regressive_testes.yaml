@@ -3,10 +3,9 @@ name: Automated Regression API Testing with Hoppscotch
 on:
   workflow_dispatch:
 
-permissions:
-  checks: write
-  contents: read
-  pull-requests: write
+  permissions:
+    checks: write
+    contents: read
 
 jobs:
   run-tests:
