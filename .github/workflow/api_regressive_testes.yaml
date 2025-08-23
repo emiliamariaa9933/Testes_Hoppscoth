@@ -1,0 +1,29 @@
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Hoppscotch CLI e Junit viewer
+        run: |
+          npm install -g @hoppscotch/cli junit-viewer
+
+      - name: Rodar testes Hoppscotch
+        run: |
+          hopp test -e scripts-hoppscotch/environments/Global.json -d 1000 scripts-hoppscotch/collections/testes_api.json --reporter-junit results/report.xml
+
+      - name: Gerar relatório HTML
+        run: |
+          junit-viewer --results=resultado.xml --save=relatorio.html
+
+      - name: Publicar artefato relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-hoppscotch
+          path: relatorio.html
