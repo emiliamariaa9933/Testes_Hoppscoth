@@ -31,8 +31,8 @@ jobs:
     steps:
       - name: Exibir dados recebidos
         run: |
-          echo "Serviço: ${{ github.event.client_payload.ambiente }}"
-          echo "Versão: ${{ github.event.client_payload.tenant }}"
+          echo "Ambiente: ${{ github.event.client_payload.ambiente }}"
+          echo "Tenant: ${{ github.event.client_payload.tenant }}"
 
       - name: Checkout repositório
         uses: actions/checkout@v4
