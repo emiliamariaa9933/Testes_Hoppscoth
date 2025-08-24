@@ -2,8 +2,7 @@ name: Automated Regressive API Testing
 
 on:
   repository_dispatch:
-    types:
-      - trigger-workflow   # tem que ser o mesmo 'event_type' usado no dispatch
+    types: [trigger-workflow]   # tem que ser o mesmo 'event_type' usado no dispatch
 
 jobs:
   run-tests:
@@ -15,8 +14,7 @@ jobs:
     steps:
       - name: Exibir dados recebidos
         run: |
-          echo "Serviço: ${{ github.event.client_payload.service }}"
-          echo "Versão: ${{ github.event.client_payload.version }}"
+          echo "Executando testes para ${{ github.event.client_payload.service }} na versão ${{ github.event.client_payload.version }}"
 
       - name: Checkout repositório
         uses: actions/checkout@v4
