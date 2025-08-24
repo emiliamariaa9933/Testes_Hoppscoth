@@ -69,6 +69,7 @@ jobs:
             --reporter-junit results/report.xml
 
       - name: Gerar relatório HTML
+        if: always()
         run: |
           junit-viewer \
             --results=results/report.xml \
@@ -76,14 +77,15 @@ jobs:
             --relativePath=true
 
       - name: Publicar artefato do relatório HTML
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: relatorio-hoppscotch
           path: results/relatorio.html
 
       - name: Publicar resultado dos testes no Summary
-        uses: dorny/test-reporter@v1
         if: always()
+        uses: dorny/test-reporter@v1
         with:
           name: 📊 Relatório de Testes de API
           path: results/report.xml
