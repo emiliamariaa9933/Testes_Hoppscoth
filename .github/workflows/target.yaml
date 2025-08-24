@@ -36,12 +36,14 @@ jobs:
           AMBIENTE: ${{ github.event.client_payload.ambiente }}
           TENANT: ${{ github.event.client_payload.tenant }}
         run: |
-          if [ "$TENANT" == "baseUrl" ]; then
+          if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
-          elif [ "$TENANT" == "DEV" ]; then
+          elif [ "$AMBIENTE" == "DEV" ]; then
               BASE_URL="https://dev.hml.api.trello.com/"
+          elif [ "$AMBIENTE" == "TRN" ]; then
+              BASE_URL="https://trn.hml.api.trello.com/"
           else
-              echo "Tenant inválido: $TENANT"
+              echo "Ambiente inválido: $AMBIENTE"
               exit 1
           fi
 
