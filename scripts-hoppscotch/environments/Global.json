@@ -1,49 +1,37 @@
 {
-    "id": "Global",
-    "v": 2,
-    "name": "Global",
-    "variables": [
-      {
-        "key": "key",
-        "secret": false,
-        "initialValue": "f7fa71a3ed229327517f1db8321cca14",
-        "currentValue": ""
-      },
-      {
-        "key": "baseUrl",
-        "secret": false,
-        "initialValue": "https://api.trello.com/",
-        "currentValue": ""
-      },
-      {
-        "key": "DEV",
-        "secret": false,
-        "initialValue": "https://dev.hml.api.trello.com/",
-        "currentValue": ""
-      },
-      {
-        "key": "TRN",
-        "secret": false,
-        "initialValue": "https://trn.hml.api.trello.com/",
-        "currentValue": ""
-      },
-      {
-        "key": "token",
-        "secret": false,
-        "initialValue": "f6a42783224d301e9e983123c682df47b40aa29c74df4f9f34e6e3c1300634ae",
-        "currentValue": ""
-      },
-      {
-        "key": "idList",
-        "secret": false,
-        "initialValue": "624d0be1a043d0069009655f",
-        "currentValue": ""
-      },
-      {
-        "key": "idCard",
-        "secret": false,
-        "initialValue": "",
-        "currentValue": ""
-      }
-    ]
-  }
+  "id": "Global",
+  "v": 2,
+  "name": "Global",
+  "variables": [
+    {
+      "key": "key",
+      "secret": false,
+      "initialValue": "f7fa71a3ed229327517f1db8321cca14",
+      "currentValue": ""
+    },
+    {
+      "key": "baseUrl",
+      "secret": false,
+      "initialValue": "https://dev.hml.api.trello.com/",
+      "currentValue": ""
+    },
+    {
+      "key": "token",
+      "secret": false,
+      "initialValue": "f6a42783224d301e9e983123c682df47b40aa29c74df4f9f34e6e3c1300634ae",
+      "currentValue": ""
+    },
+    {
+      "key": "idList",
+      "secret": false,
+      "initialValue": "624d0be1a043d0069009655f",
+      "currentValue": ""
+    },
+    {
+      "key": "idCard",
+      "secret": false,
+      "initialValue": "",
+      "currentValue": ""
+    }
+  ]
+}

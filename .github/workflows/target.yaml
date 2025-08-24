@@ -33,17 +33,25 @@ jobs:
 
       - name: Configurar baseUrl dinamicamente
         run: |
-          TENANT=${{ github.event.client_payload.tenant }}
-          if [ "$TENANT" = "baseUrl" ]; then
-            BASE_URL="https://api.trello.com/"
-          elif [ "$TENANT" = "DEV" ]; then
-            BASE_URL="https://dev.hml.api.trello.com/"
+          if [ "$TENANT" == "baseUrl" ]; then
+              BASE_URL="https://api.trello.com/"
+          elif [ "$TENANT" == "DEV" ]; then
+              BASE_URL="https://dev.hml.api.trello.com/"
           else
-            echo "Tenant inválido: $TENANT"
-            exit 1
+              echo "Tenant inválido: $TENANT"
+              exit 1
           fi
-          jq --arg url "$BASE_URL" '.variables.baseUrl = $url' scripts-hoppscotch/environments/Global.json > temp.json && mv temp.json scripts-hoppscotch/environments/Global.json
 
+          jq --arg url "$BASE_URL" '
+            .variables |= map(
+              if .key == "baseUrl" then
+                .initialValue = $url
+              else
+                .
+              end
+            )
+          ' scripts-hoppscotch/environments/Global.json > scripts-hoppscotch/environments/Global-temp.json && mv scripts-hoppscotch/environments/Global-temp.json scripts-hoppscotch/environments/Global.json
+      
       - name: Executar testes de API
         env:
           AMBIENTE: ${{ github.event.client_payload.ambiente }}

@@ -1,6 +1,7 @@
 # Ignorar arquivos de relatório
 *.xml
 *.html
+*.json
 
 # Opcional: ignorar pastas onde você armazena relatórios
 /reports/
