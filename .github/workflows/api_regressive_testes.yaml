@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Exibir dados recebidos
         run: |
-          echo "Executando testes para ${{ github.event.client_payload.service }} na versão ${{ github.event.client_payload.version }}"
+          echo "Serviço: ${{ github.event.client_payload.service }}"
+          echo "Versão: ${{ github.event.client_payload.version }}"
 
       - name: Checkout repositório
         uses: actions/checkout@v4
