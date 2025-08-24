@@ -31,8 +31,8 @@ jobs:
     steps:
       - name: Exibir dados recebidos
         run: |
-          echo "Ambiente: ${{ github.event.client_payload.ambiente }}"
-          echo "Tenant: ${{ github.event.client_payload.tenant }}"
+          echo "Ambiente: ${{ github.event.inputs.ambiente }}"
+          echo "Tenant: ${{ github.event.inputs.tenant }}"
 
       - name: Checkout repositório
         uses: actions/checkout@v4
@@ -48,8 +48,8 @@ jobs:
 
       - name: Configurar baseUrl dinamicamente
         env:
-          AMBIENTE: ${{ github.event.client_payload.ambiente }}
-          TENANT: ${{ github.event.client_payload.tenant }}
+          AMBIENTE: ${{ github.event.inputs.ambiente }}
+          TENANT: ${{ github.event.inputs.tenant }}
         run: |
           if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
@@ -74,8 +74,8 @@ jobs:
       
       - name: Executar testes de API
         env:
-          AMBIENTE: ${{ github.event.client_payload.ambiente }}
-          TENANT: ${{ github.event.client_payload.tenant }}
+          AMBIENTE: ${{ github.event.inputs.ambiente }}
+          TENANT: ${{ github.event.inputs.tenant }}
         run: |
           mkdir -p results
           hopp test \
