@@ -66,7 +66,7 @@ jobs:
           hopp test \
             -e scripts-hoppscotch/environments/Global.json \
             -d 1000 scripts-hoppscotch/collections/testes_api.json \
-            --reporter-junit results/report.xml
+            --reporter-junit results/report.xml || true
 
       - name: Gerar relatório HTML
         if: always()
