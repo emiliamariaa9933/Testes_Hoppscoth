@@ -31,6 +31,19 @@ jobs:
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
+      - name: Configurar baseUrl dinamicamente
+        run: |
+          TENANT="${{ github.event.client_payload.tenant }}"
+          if [ "$TENANT" = "baseUrl" ]; then
+            BASE_URL="https://api.trello.com/"
+          elif [ "$TENANT" = "DEV" ]; then
+            BASE_URL="https://dev.hml.api.trello.com/"
+          else
+            echo "Tenant inválido: $TENANT"
+            exit 1
+          fi
+          jq --arg url "$BASE_URL" '.variables.baseUrl = $url' scripts-hoppscotch/environments/Global.json > temp.json && mv temp.json scripts-hoppscotch/environments/Global.json
+
       - name: Executar testes de API
         env:
           AMBIENTE: ${{ github.event.client_payload.ambiente }}
@@ -41,7 +54,6 @@ jobs:
             -e scripts-hoppscotch/environments/Global.json \
             -d 1000 scripts-hoppscotch/collections/testes_api.json \
             --reporter-junit results/report.xml
-
 
       - name: Gerar relatório HTML
         run: |
