@@ -17,7 +17,7 @@ jobs:
           echo "Serviço: ${{ github.event.client_payload.service }}"
           echo "Versão: ${{ github.event.client_payload.version }}"
           echo "Ambiente: ${{ github.event.client_payload.ambiente }}"
-          echo "Tenant: ${{ github.event.client_payload.tentant }}"
+          echo "Tenant: ${{ github.event.client_payload.tenant }}"
 
       - name: Checkout do repositório
         uses: actions/checkout@v4
