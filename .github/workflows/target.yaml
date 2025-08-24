@@ -32,6 +32,9 @@ jobs:
           npm install -g @hoppscotch/cli junit-viewer
 
       - name: Configurar baseUrl dinamicamente
+        env:
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}
+          TENANT: ${{ github.event.client_payload.tenant }}
         run: |
           if [ "$TENANT" == "baseUrl" ]; then
               BASE_URL="https://api.trello.com/"
