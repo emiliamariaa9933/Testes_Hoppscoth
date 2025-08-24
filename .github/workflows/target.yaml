@@ -1,4 +1,4 @@
-name: Automated Regressive API Testing
+name: Execução de Testes no Services
 
 on:
   repository_dispatch:
