@@ -1,7 +1,8 @@
 name: Automated Regressive API Testing
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-workflow]   # tem que ser o mesmo 'event_type' usado no dispatch
 
 jobs:
   run-tests:
