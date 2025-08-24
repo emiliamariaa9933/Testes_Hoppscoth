@@ -16,6 +16,18 @@
         "currentValue": ""
       },
       {
+        "key": "DEV",
+        "secret": false,
+        "initialValue": "https://dev.hml.api.trello.com/",
+        "currentValue": ""
+      },
+      {
+        "key": "TRN",
+        "secret": false,
+        "initialValue": "https://trn.hml.api.trello.com/",
+        "currentValue": ""
+      },
+      {
         "key": "token",
         "secret": false,
         "initialValue": "f6a42783224d301e9e983123c682df47b40aa29c74df4f9f34e6e3c1300634ae",

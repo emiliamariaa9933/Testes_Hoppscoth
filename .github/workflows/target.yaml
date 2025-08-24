@@ -16,6 +16,8 @@ jobs:
         run: |
           echo "Serviço: ${{ github.event.client_payload.service }}"
           echo "Versão: ${{ github.event.client_payload.version }}"
+          echo "Ambiente: ${{ github.event.client_payload.ambiente }}"
+          echo "Tenant: ${{ github.event.client_payload.tentant }}"
 
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -30,12 +32,16 @@ jobs:
           npm install -g @hoppscotch/cli junit-viewer
 
       - name: Executar testes de API
+        env:
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}
+          TENANT: ${{ github.event.client_payload.tenant }}
         run: |
           mkdir -p results
           hopp test \
             -e scripts-hoppscotch/environments/Global.json \
             -d 1000 scripts-hoppscotch/collections/testes_api.json \
             --reporter-junit results/report.xml
+
 
       - name: Gerar relatório HTML
         run: |
