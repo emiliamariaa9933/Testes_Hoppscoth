@@ -45,7 +45,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards",
+                "endpoint": "<<BASE_URL>>1/cards",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Set environment for idCard\", () => {\r\n    const response = pw.response.body;\r\n\r\n    // Armazena o ID do primeiro item como variável de ambiente\r\n    pw.env.set(\"idCard\", response.id);\r\n});\r\n\r\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
                 "preRequestScript": "",
@@ -84,7 +84,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards",
+                "endpoint": "<<BASE_URL>>1/cards",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n  pw.expect(pw.response.status).toBe(400);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n  const user = pw.response.body;\r\n  pw.expect(user.message).toBe(\"invalid date\");\r\n  pw.expect(user.error).toBe(\"ERROR\");\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n  const user = pw.response.body;\r\n  pw.expect(user.message).toBeType(\"string\");\r\n  pw.expect(user.error).toBeType(\"string\");\r\n});",
                 "preRequestScript": "",
@@ -123,7 +123,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards",
+                "endpoint": "<<BASE_URL>>1/cards",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(400);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const response = pw.response.body;\r\n    pw.expect(response).toBe(\"invalid value for name\");\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const response = pw.response.body;\r\n    pw.expect(response).toBeType(\"string\");\r\n});",
                 "preRequestScript": "",
@@ -169,7 +169,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "endpoint": "<<BASE_URL>>1/cards/<<idCard>>",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
                 "preRequestScript": "",
@@ -215,7 +215,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "endpoint": "<<BASE_URL>>1/cards/<<idCard>>",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
                 "preRequestScript": "",
@@ -248,7 +248,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "endpoint": "<<BASE_URL>>1/cards/<<idCard>>",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).not.toBe(null);\r\n    pw.expect(card.badges).not.toBe(null);\r\n    pw.expect(card.badges.attachments).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card.id).toBeType(\"string\");\r\n    pw.expect(card.badges).toBeType(\"object\");\r\n    pw.expect(card.badges.attachments).toBeType(\"number\");\r\n});",
                 "preRequestScript": "",
@@ -294,7 +294,7 @@
                   }
                 ],
                 "headers": [],
-                "endpoint": "<<baseUrl>>1/cards/<<idCard>>",
+                "endpoint": "<<BASE_URL>>1/cards/<<idCard>>",
                 "responses": {},
                 "testScript": "export {};\npw.test(\"Response is ok\", () => {\r\n    pw.expect(pw.response.status).toBe(200);\r\n});\r\n\r\n\r\npw.test(\"Check message\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card).not.toBe(null);\r\n});\r\n\r\npw.test(\"Check type\", () => {\r\n    const card = pw.response.body;\r\n    pw.expect(card).toBeType(\"object\");\r\n});",
                 "preRequestScript": "",
