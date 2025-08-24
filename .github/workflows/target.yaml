@@ -33,7 +33,7 @@ jobs:
 
       - name: Configurar baseUrl dinamicamente
         run: |
-          TENANT="${{ github.event.client_payload.tenant }}"
+          TENANT=${{ github.event.client_payload.tenant }}
           if [ "$TENANT" = "baseUrl" ]; then
             BASE_URL="https://api.trello.com/"
           elif [ "$TENANT" = "DEV" ]; then
