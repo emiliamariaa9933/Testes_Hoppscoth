@@ -2,6 +2,24 @@ name: Automated Regressive API Testing
 
 on:
   workflow_dispatch:
+    inputs:
+      ambiente:
+        description: 'Selecione o ambiente dos testes'
+        required: true
+        type: choice
+        default: HML
+        options:
+          - DEV
+          - HML
+          - TRN
+      tenant:
+        description: 'Selecione o tenant que deseja executar os testes'
+        required: true
+        type: choice
+        default: EUD
+        options:
+          - EUD
+          - BOT
 
 jobs:
   run-tests:
@@ -13,8 +31,8 @@ jobs:
     steps:
       - name: Exibir dados recebidos
         run: |
-          echo "Serviço: ${{ github.event.client_payload.service }}"
-          echo "Versão: ${{ github.event.client_payload.version }}"
+          echo "Serviço: ${{ github.event.client_payload.ambiente }}"
+          echo "Versão: ${{ github.event.client_payload.tenant }}"
 
       - name: Checkout repositório
         uses: actions/checkout@v4
@@ -28,7 +46,36 @@ jobs:
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
-      - name: Executar Testes API
+      - name: Configurar baseUrl dinamicamente
+        env:
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}
+          TENANT: ${{ github.event.client_payload.tenant }}
+        run: |
+          if [ "$AMBIENTE" == "HML" ]; then
+              BASE_URL="https://api.trello.com/"
+          elif [ "$AMBIENTE" == "DEV" ]; then
+              BASE_URL="https://dev.hml.api.trello.com/"
+          elif [ "$AMBIENTE" == "TRN" ]; then
+              BASE_URL="https://trn.hml.api.trello.com/"
+          else
+              echo "Ambiente inválido: $AMBIENTE"
+              exit 1
+          fi
+
+          jq --arg url "$BASE_URL" '
+            .variables |= map(
+              if .key == "baseUrl" then
+                .initialValue = $url
+              else
+                .
+              end
+            )
+          ' scripts-hoppscotch/environments/Global.json > scripts-hoppscotch/environments/Global-temp.json && mv scripts-hoppscotch/environments/Global-temp.json scripts-hoppscotch/environments/Global.json
+      
+      - name: Executar testes de API
+        env:
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}
+          TENANT: ${{ github.event.client_payload.tenant }}
         run: |
           mkdir -p results
           hopp test \
