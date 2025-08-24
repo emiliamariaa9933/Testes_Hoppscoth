@@ -1,16 +1,23 @@
 name: Automated Regressive API Testing
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - trigger-workflow   # tem que ser o mesmo 'event_type' usado no dispatch
 
 jobs:
   run-tests:
     runs-on: ubuntu-latest
     permissions:
       contents: read      # Necessário para ler o repositório
-      checks: write       # ✅ Necessário para o dorny/test-reporter funcionar corretamente
+      checks: write       # Necessário para o dorny/test-reporter funcionar corretamente
 
     steps:
+      - name: Exibir dados recebidos
+        run: |
+          echo "Serviço: ${{ github.event.client_payload.service }}"
+          echo "Versão: ${{ github.event.client_payload.version }}"
+
       - name: Checkout repositório
         uses: actions/checkout@v4
 
@@ -22,7 +29,7 @@ jobs:
       - name: Instalar Dependências
         run: |
           npm install -g @hoppscotch/cli junit-viewer
-          
+
       - name: Executar Testes API
         run: |
           mkdir -p results
