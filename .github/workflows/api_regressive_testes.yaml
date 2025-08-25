@@ -63,20 +63,20 @@ jobs:
               exit 1
           fi
 
-          if [ "$TENANT" == "clienteA" ]; then
-              TENANT_URL="https://clienteA.tenant.api.trello.com/"
-          elif [ "$TENANT" == "clienteB" ]; then
-              TENANT_URL="https://clienteB.tenant.api.trello.com/"
+          if [ "$TENANT" == "EUD" ]; then
+              TENANT_URL="EUD"
+          elif [ "$TENANT" == "BOT" ]; then
+              TENANT_URL="BOT"
           else
               echo "Tenant inválido ou não configurado: $TENANT"
               exit 1
           fi
 
-          jq --arg url "$BASE_URL" --arg tenant "$TENANT_URL" '
+          jq --arg baseUrl "$BASE_URL" --arg tenant "$TENANT" '
             .variables |= map(
               if .key == "baseUrl" then
                 .initialValue = $url
-              elif .key == "tenantUrl" then
+              elif .key == "tenant" then
                 .initialValue = $tenant
               else
                 .

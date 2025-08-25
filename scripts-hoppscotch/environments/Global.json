@@ -12,7 +12,13 @@
     {
       "key": "baseUrl",
       "secret": false,
-      "initialValue": "https://dev.hml.api.trello.com/",
+      "initialValue": "",
+      "currentValue": ""
+    },
+    {
+      "key": "tenant",
+      "secret": false,
+      "initialValue": "",
       "currentValue": ""
     },
     {
