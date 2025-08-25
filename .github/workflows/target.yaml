@@ -59,10 +59,10 @@ jobs:
               exit 1
           fi
 
-          jq --arg baseUrl "$BASE_URL" --arg tenant "$TENANT" '
+          jq --arg url "$BASE_URL" --arg tenant "$TENANT" '
             .variables |= map(
               if .key == "baseUrl" then
-                .initialValue = $baseUrl
+                .initialValue = $url
               elif .key == "tenant" then
                 .initialValue = $tenant
               else
