@@ -48,10 +48,9 @@ jobs:
 
       - name: Configurar Variáveis Globais Dinamicamente
         env:
-          AMBIENTE: ${{ github.event.inputs.ambiente }}
-          TENANT: ${{ github.event.inputs.tenant }}
+          AMBIENTE: ${{ github.event.inputs.ambiente }}   # Quando for selecionada manualmente, a variável AMBIENTE é passada através do evento inputs
+          TENANT: ${{ github.event.inputs.tenant }}   # Quando for selecionada manualmente, a variável AMBIENTE é passada através do evento inputs
         run: |
-          # Definir BASE_URL com base no ambiente
           if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
           elif [ "$AMBIENTE" == "DEV" ]; then
@@ -86,8 +85,8 @@ jobs:
       
       - name: Executar testes de API
         env:
-          AMBIENTE: ${{ github.event.inputs.ambiente }}
-          TENANT: ${{ github.event.inputs.tenant }}
+          AMBIENTE: ${{ github.event.inputs.ambiente }}   # Quando for selecionada manualmente, a variável AMBIENTE é passada através do evento inputs
+          TENANT: ${{ github.event.inputs.tenant }}   # Quando for selecionada manualmente, a variável TENANT é passada através do evento inputs
         run: |
           mkdir -p results
           hopp test \

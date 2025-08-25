@@ -35,10 +35,9 @@ jobs:
 
       - name: Configurar Variáveis Globais Dinamicamente
         env:
-          AMBIENTE: ${{ github.event.inputs.ambiente }}
-          TENANT: ${{ github.event.inputs.tenant }}
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}   # Quando for pelo trigger-workflow, a variável AMBIENTE é passada através do client_payload
+          TENANT: ${{ github.event.client_payload.tenant }}   # Quando for pelo trigger-workflow, a variável AMBIENTE é passada através do client_payload
         run: |
-          # Definir BASE_URL com base no ambiente
           if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
           elif [ "$AMBIENTE" == "DEV" ]; then
@@ -73,8 +72,8 @@ jobs:
       
       - name: Executar testes de API
         env:
-          AMBIENTE: ${{ github.event.client_payload.ambiente }}
-          TENANT: ${{ github.event.client_payload.tenant }}
+          AMBIENTE: ${{ github.event.client_payload.ambiente }}   # Quando for pelo trigger-workflow, a variável AMBIENTE é passada através do client_payload
+          TENANT: ${{ github.event.client_payload.tenant }}   # Quando for pelo trigger-workflow, a variável TENANT é passada através do client_payload
         run: |
           mkdir -p results
           hopp test \
