@@ -110,8 +110,8 @@ jobs:
           path: results/relatorio.html
 
       - name: Publicar resultado dos testes no Summary
-        uses: dorny/test-reporter@v1
         if: always()
+        uses: dorny/test-reporter@v1
         with:
           name: 📊 Relatório de Testes de API
           path: results/report.xml
