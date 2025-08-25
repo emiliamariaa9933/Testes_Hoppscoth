@@ -10,7 +10,7 @@
       "currentValue": ""
     },
     {
-      "key": "BASE_URL",
+      "key": "baseUrl",
       "secret": false,
       "initialValue": "https://dev.hml.api.trello.com/",
       "currentValue": ""

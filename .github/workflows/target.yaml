@@ -33,11 +33,12 @@ jobs:
         run: |
           npm install -g @hoppscotch/cli junit-viewer
 
-      - name: Configurar baseUrl dinamicamente
+      - name: Configurar Variáveis Globais Dinamicamente
         env:
-          AMBIENTE: ${{ github.event.client_payload.ambiente }}
-          TENANT: ${{ github.event.client_payload.tenant }}
+          AMBIENTE: ${{ github.event.inputs.ambiente }}
+          TENANT: ${{ github.event.inputs.tenant }}
         run: |
+          # Definir BASE_URL com base no ambiente
           if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
           elif [ "$AMBIENTE" == "DEV" ]; then
@@ -49,10 +50,21 @@ jobs:
               exit 1
           fi
 
-          jq --arg url "$BASE_URL" '
+          if [ "$TENANT" == "clienteA" ]; then
+              TENANT_URL="https://clienteA.tenant.api.trello.com/"
+          elif [ "$TENANT" == "clienteB" ]; then
+              TENANT_URL="https://clienteB.tenant.api.trello.com/"
+          else
+              echo "Tenant inválido ou não configurado: $TENANT"
+              exit 1
+          fi
+
+          jq --arg url "$BASE_URL" --arg tenant "$TENANT_URL" '
             .variables |= map(
               if .key == "baseUrl" then
                 .initialValue = $url
+              elif .key == "tenantUrl" then
+                .initialValue = $tenant
               else
                 .
               end
