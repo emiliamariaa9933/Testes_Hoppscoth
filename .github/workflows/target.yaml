@@ -69,9 +69,6 @@ jobs:
           ' scripts-hoppscotch/environments/Global.json > scripts-hoppscotch/environments/Global-temp.json && mv scripts-hoppscotch/environments/Global-temp.json scripts-hoppscotch/environments/Global.json
       
       - name: Executar testes de API
-        env:
-          AMBIENTE: ${{ github.event.client_payload.ambiente }}   # Quando for pelo trigger-workflow, a variável AMBIENTE é passada através do client_payload
-          TENANT: ${{ github.event.client_payload.tenant }}   # Quando for pelo trigger-workflow, a variável TENANT é passada através do client_payload
         run: |
           mkdir -p results
           hopp test \

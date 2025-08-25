@@ -47,9 +47,6 @@ jobs:
           npm install -g @hoppscotch/cli junit-viewer
 
       - name: Configurar Variáveis Globais Dinamicamente
-        env:
-          AMBIENTE: ${{ github.event.inputs.ambiente }}   # Quando for selecionada manualmente, a variável AMBIENTE é passada através do evento inputs
-          TENANT: ${{ github.event.inputs.tenant }}   # Quando for selecionada manualmente, a variável AMBIENTE é passada através do evento inputs
         run: |
           if [ "$AMBIENTE" == "HML" ]; then
               BASE_URL="https://api.trello.com/"
